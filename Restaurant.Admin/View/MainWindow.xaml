@@ -1,0 +1,132 @@
+﻿<Window x:Class="Restaurant.Admin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Admin"
+        xmlns:viewModel="clr-namespace:Restaurant.Admin.ViewModel"
+        Title="Restaurant admin interface" Height="600" Width="1200">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <!-- Grid definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="0.6*" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Database">
+                <MenuItem Header="Refresh" Command="{Binding LoadCommand}" />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+        
+        <!-- Left column: Orders -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Orders" Grid.Row="0" Margin="2" FontWeight="SemiBold" />
+            <DataGrid Name="OrderGrid"  Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" Margin="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" />
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                    <DataGridTextColumn Header="Ordered" Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="Completed" Binding="{Binding CompleteTime}" />
+                    <DataGridCheckBoxColumn Header="Done" Binding="{Binding Completed}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="View" Command="{Binding Path=DataContext.EditOrderCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch" />
+
+        <!-- Mid column: Foods -->
+        <Grid Grid.Row="1" Grid.Column="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Foods" Grid.Row="0" Margin="2" FontWeight="SemiBold" />
+            <DataGrid Name="FoodGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Foods}" SelectedItem="{Binding SelectedFood}" Margin="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                    <DataGridCheckBoxColumn Header="Spicy" Binding="{Binding Spicy}" />
+                    <DataGridCheckBoxColumn Header="Vegetarian" Binding="{Binding Vegetarian}" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Command="{Binding Path=DataContext.EditFoodCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="2" Content="New" Command="{Binding AddFoodCommand}" Margin="2" />
+        </Grid>
+
+        <GridSplitter Grid.Column="3" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch" />
+
+        <!-- Right column: Categories -->
+        <Grid Grid.Row="1" Grid.Column="4">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Categories" Grid.Row="0" Margin="2" FontWeight="SemiBold" />
+            <DataGrid Name="CategoryGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Link" Binding="{Binding Link}" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding TypeName}" />
+                    <DataGridCheckBoxColumn Header="Complex" Binding="{Binding ComplexList}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Command="{Binding Path=DataContext.EditCategoryCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Command="{Binding Path=DataContext.DeleteCategoryCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="2" Content="New" Command="{Binding AddCategoryCommand}" Margin="2" />
+        </Grid>
+    </Grid>
+</Window>

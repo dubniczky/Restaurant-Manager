@@ -1,0 +1,42 @@
+﻿<Window x:Class="Restaurant.Admin.View.CategoryEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.Admin.View"
+        mc:Ignorable="d"
+        Title="CategoryEditWindow" Height="160" Width="400">
+    <Grid Margin="5">
+        <!-- Grid definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Name -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EditedCategory.Name}" Margin="2" />
+        <!-- Link -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Link:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EditedCategory.Link}" Margin="2" />
+        <!-- Type Name -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Type:" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding EditedCategory.TypeName}" Margin="2" />
+        <!-- Complex -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Complex List:" />
+        <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding EditedCategory.ComplexList}" Margin="2" />
+        
+        <!-- Buttons -->
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Save" Margin="5" Command="{Binding SaveCategoryCommand}" Width="150" />
+            <Button Content="Cancel" Margin="5" Command="{Binding CancelCategoryCommand}" Width="100" />
+        </StackPanel>
+    </Grid>
+</Window>
