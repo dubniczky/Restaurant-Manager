@@ -1,0 +1,17 @@
+﻿.category-item
+{
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    background-color: darkolivegreen;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+}
+.category-item:hover
+{
+    color: white;
+    text-decoration: none;
+    background-color: darkseagreen;
+}

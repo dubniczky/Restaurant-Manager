@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Http
+@model CartViewModel
+@{
+    ViewData["Title"] = "Kosár";
+}
+
+<link rel="stylesheet" href="~/css/Index.css">
+
+<h3>Kosár tartalma:</h3>
+
+<h4 class="status-box">@ViewData["Message"]</h4>
+
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>Ár</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.Foods)
+            {
+                <tr>
+                    <td>@c.Name</td>
+                    <td>@c.Price</td>
+                    <!-- asp-action pizzasdelete -->
+                    <td><input type="submit"
+                               formaction="/cart/remove/@c.Id" formmethod="get" value="Törlés" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+<h3>Összesítés:</h3>
+<div>
+    <p>Összeg: @Model.Price Ft</p>
+</div>
+
+<h3>Adatok:</h3>
+<form asp-controller="Home" asp-action="CartSubmit" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <input asp-for="Customer.Name" />
+    @Html.DisplayNameFor(model => model.Customer.Name)<br />
+    <input asp-for="Customer.Phone" />
+    @Html.DisplayNameFor(model => model.Customer.Phone)<br />
+    <input asp-for="Customer.Address" />
+    @Html.DisplayNameFor(model => model.Customer.Address)<br />
+
+    <button type="submit">Elküldés</button>
+</form>

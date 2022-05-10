@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Http
+@model ListViewModel
+@{
+    ViewData["Title"] = "Pizzák";
+}
+
+<link rel="stylesheet" href="~/css/Index.css">
+<script defer src="~/js/jQuery.js"></script>
+<script defer src="~/js/search.js"></script>
+
+<h1>@Model.Category.Name</h1>
+
+<h4 class="status-box">@ViewData["Message"]</h4>
+
+Keresés:
+<input type="text" id="foodsSearch">
+
+<form method="post">
+    <table class="table" id="foodsTable">
+        <thead>
+            <tr>
+                <th>Név</th>
+                @if (Model.Category.ComplexList)
+                {
+                    <th>Leírás</th>
+                    <th>Csípős</th>
+                    <th>Vega</th>
+                }
+                <th>Ár</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in Model.Foods)
+            {
+                <tr>
+                    <td>@f.Name</td>
+                    @if (Model.Category.ComplexList)
+                    {
+                        <td>@f.Description</td>
+                        <td>@(f.Spicy ? "Igen" : "Nem")</td>
+                        <td>@(f.Vegetarian ? "Igen" : "Nem")</td>
+                    }
+                    <td>@f.Price Ft</td>
+                    <td>
+                        <input type="submit"
+                               formaction="/cart/add/@Model.Category.Link.Trim()/@f.Id" formmethod="get" value="Kosárba" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

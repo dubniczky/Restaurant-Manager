@@ -1,0 +1,37 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<link rel="stylesheet" href="~/css/Index.css">
+<center><h1>Üdvözöllek éttermemben!</h1></center>
+
+@* Categories list *@
+<h3>Kategóriák:</h3>
+<div>
+    @foreach (var c in Model.Categories)
+    {
+        <a class="category-item" href="@Url.Action("Category", "Home", new { category = c.Link.Trim() })">@c.Name</a>
+    }
+</div>
+
+@* Top Foods list *@
+
+<h3>Lengnépszerűbb ételeink:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Név</th>
+            <th>Ár</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var f in Model.TopFoods)
+        {
+            <tr>
+                <td>@f.Name</td>
+                <td>@f.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
