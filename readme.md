@@ -2,6 +2,10 @@
 
 A web-based restaurant manager with WPF desktop application admin interface.
 
+<div align="center">
+  <img src="https://media.githubusercontent.com/media/dubniczky/Restaurant-Manager/main/assets/logo-transparent.png" alt="Avatar" width="120" height="120"/>
+</div>
+
 ## Support ❤️
 
 If you find the project useful, please consider supporting, or contributing.
