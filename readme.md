@@ -2,6 +2,12 @@
 
 A web-based restaurant manager with WPF desktop application admin interface.
 
+## Support ❤️
+
+If you find the project useful, please consider supporting, or contributing.
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dubniczky)
+
 ## System
 
 The system consists of 4 main parts:
